@@ -1,4 +1,4 @@
-import mysql from 'mysql/promise'
+import mysql from 'mysql2/promise';
 
 
 const pool = mysql.createPool({
@@ -13,7 +13,7 @@ const pool = mysql.createPool({
 })
 
 
-export const initMySQL = async () => {
+export const mysqlDB = async () => {
     try {
         const serverConnection = await mysql.createConnection({
             host: process.env.MYSQL_HOST || 'localhost',
