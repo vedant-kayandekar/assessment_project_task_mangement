@@ -57,7 +57,7 @@ export const mysqlDB = async () => {
         `)
 
         connection.release()
-        console.log('MySQL Tables (users, projects) initialized and ready.')
+        console.log('MySQL Db is ready.')
     } catch (error) {
         console.error('MySQL Initialization Error:', error.message)
         throw error
