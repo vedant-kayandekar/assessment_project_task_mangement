@@ -2,6 +2,7 @@ import express from 'express'
 import errorHandler from './middleware/errorMiddleware.js'
 import authRoutes from './routes/authRoutes.js'
 import projectRoutes from './routes/projectRoutes.js'
+import taskRoutes from './routes/taskRoutes.js'
 
 const app = express()
 
@@ -18,6 +19,7 @@ app.get('/health', (req, res) => {
 // ROUTES
 app.use('/api/auth', authRoutes)
 app.use('/api/projects', projectRoutes)
+app.use('/api/tasks', taskRoutes)
 
 // error handler must be last
 app.use(errorHandler)
