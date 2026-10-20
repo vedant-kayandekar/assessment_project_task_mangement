@@ -323,6 +323,17 @@ A complete testing file is provided in [`api-test.rest`](./api-test.rest).
 
 ---
 
+## Testing with Postman (`postman_collection.json`)
+
+If you prefer testing with **Postman**:
+1. Open Postman.
+2. Click the **Import** button in the top-left corner.
+3. Select the included [`postman_collection.json`](./postman_collection.json) file from this repository.
+4. Run **1.1 Register** or **1.2 Login** — the test script automatically captures the JWT token and stores it in `{{token}}` so all other requests work instantly without manual copy-pasting!
+
+
+---
+
 ## Error Handling
 
 Centralized error handling middleware intercepts all errors and returns consistent responses:
