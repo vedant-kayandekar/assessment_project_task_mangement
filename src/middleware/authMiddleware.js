@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken'
-import pool from '../conif/mysql.js'
+import pool from '../config/mysql.js'
 import {projectError} from './errorMiddleware.js'
 
-export const protect = async (req,res) =>{
+export const protect = async (req,res,next) =>{
     try{
         let token = null
 
@@ -14,26 +14,26 @@ export const protect = async (req,res) =>{
         }
 
         if(!token){
-            return nextId(new projectError('Access denied, no token provided for authentication',401))
+            return next(new projectError('Access denied, no token provided for authentication',401))
         }
 
         //verify token 
         const decode = jwt.verify(token,process.env.JWT_SECRET)
 
         const [rows] = await pool.query(
-            'SELECT id, name, created_at FROM users WHERE id = ?',
-            decode[id]
+            'SELECT id, name, email, created_at FROM users WHERE id = ?',
+            [decode.id]
         )
 
         if(!rows || rows.length === 0){
-            return nextId(new projectError('The user belonging to this token no longer exists.', 401))
+            return next(new projectError('The user belonging to this token no longer exists.', 401))
         }
 
         req.user = rows[0]
-        nextId()
+        next()
 
     }catch(err){
-        nextId(err)
+        next(err)
     }
 }
 
